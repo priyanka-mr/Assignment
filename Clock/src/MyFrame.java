@@ -1,11 +1,9 @@
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.*;
-import java.util.*;
+
 import javax.swing.*;
 
 
@@ -13,7 +11,7 @@ public class MyFrame extends JFrame{
 	
 	DateTimeFormatter timeFormat;
 	LocalDateTime currentTime = LocalDateTime.now();
-	 JLabel timeLabel;
+	 JLabel timeLabel = new JLabel();
 	 JTextField textField;
 	 JButton button;
 	 JLabel newLabel;
@@ -22,22 +20,21 @@ public class MyFrame extends JFrame{
 
 	 MyFrame(){
 	  this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	  this.setTitle("My Clock Program");
+	  this.setTitle("Clock Program");
 	  this.setLayout(new FlowLayout());
 	  this.setSize(500,250);
 	  this.setResizable(false);
 	  
 	  timeFormat = DateTimeFormatter.ofPattern("hh:mm:ss a");	  
-	  timeLabel = new JLabel();
-	  timeLabel.setFont(new Font("Verdana",Font.PLAIN,50));
-	  timeLabel.setForeground(new Color(0x00FF00));
+	  timeLabel.setFont(new Font("Arial",Font.PLAIN,65));
+	  timeLabel.setForeground(Color.WHITE);
 	  timeLabel.setBackground(Color.black);
 	  timeLabel.setOpaque(true); 
 	  textField = new JTextField(30);
 	  button = new JButton("Enter");
 	  newLabel = new JLabel();
-	  newLabel.setFont(new Font("Verdana",Font.PLAIN,50));
-	  newLabel.setForeground(new Color(0x00FF00));
+	  newLabel.setFont(new Font("Arial",Font.PLAIN,65));
+	  newLabel.setForeground(Color.WHITE);
 	  newLabel.setBackground(Color.black);
 	  newLabel.setOpaque(true);
 	  button.addActionListener(new ActionListener() {

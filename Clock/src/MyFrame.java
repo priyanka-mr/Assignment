@@ -1,5 +1,9 @@
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.*;
 import java.util.*;
 import javax.swing.*;
@@ -7,10 +11,12 @@ import javax.swing.*;
 
 public class MyFrame extends JFrame{
 	
-	SimpleDateFormat timeFormat;
+	DateTimeFormatter timeFormat;
+	LocalDateTime currentTime = LocalDateTime.now();
 	 JLabel timeLabel;
 	 JTextField textField;
 	 JButton button;
+	 JLabel newLabel;
 	 String time;
 
 
@@ -21,7 +27,7 @@ public class MyFrame extends JFrame{
 	  this.setSize(500,250);
 	  this.setResizable(false);
 	  
-	  timeFormat = new SimpleDateFormat("hh:mm:ss a");	  
+	  timeFormat = DateTimeFormatter.ofPattern("hh:mm:ss a");	  
 	  timeLabel = new JLabel();
 	  timeLabel.setFont(new Font("Verdana",Font.PLAIN,50));
 	  timeLabel.setForeground(new Color(0x00FF00));
@@ -29,9 +35,22 @@ public class MyFrame extends JFrame{
 	  timeLabel.setOpaque(true); 
 	  textField = new JTextField(30);
 	  button = new JButton("Enter");
+	  newLabel = new JLabel();
+	  newLabel.setFont(new Font("Verdana",Font.PLAIN,50));
+	  newLabel.setForeground(new Color(0x00FF00));
+	  newLabel.setBackground(Color.black);
+	  newLabel.setOpaque(true);
+	  button.addActionListener(new ActionListener() {
+		  public void actionPerformed(ActionEvent e) {
+			  String input = textField.getText();
+			  int seconds = Integer.parseInt(input);
+			  updateTime(seconds);
+		  }
+	  });
 	  this.add(timeLabel);
 	  this.add(textField);
 	  this.add(button);
+	  this.add(newLabel);
 	  this.setVisible(true);
 	  
 	  setTime();
@@ -39,7 +58,7 @@ public class MyFrame extends JFrame{
 	 
 	 public void setTime() {
 	  while(true) {
-	  time = timeFormat.format(Calendar.getInstance().getTime());
+	  time = timeFormat.format(currentTime);
 	  timeLabel.setText(time);
 	  try {
 	   Thread.sleep(1000);
@@ -48,6 +67,11 @@ public class MyFrame extends JFrame{
 	   e.printStackTrace();
 	  }
 	  }
+	 }
+	 public void updateTime(int seconds) {	
+		 LocalDateTime newTime = currentTime.minusSeconds(seconds);
+		 time = timeFormat.format(newTime);
+		 newLabel.setText(time);
 	 }
 
 }

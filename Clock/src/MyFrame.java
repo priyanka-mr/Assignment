@@ -57,16 +57,8 @@ public class MyFrame extends JFrame{
 	 }
 	 
 	 public void setTime() {
-	  while(true) {
 	  time = timeFormat.format(currentTime);
 	  timeLabel.setText(time);
-	  try {
-	   Thread.sleep(1000);
-	  } catch (InterruptedException e) {
-	   // TODO Auto-generated catch block
-	   e.printStackTrace();
-	  }
-	  }
 	 }
 	 public void updateTime(int seconds) {	
 		 LocalDateTime newTime = currentTime.minusSeconds(seconds);
